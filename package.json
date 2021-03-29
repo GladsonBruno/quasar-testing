@@ -7,6 +7,7 @@
   "author": "Jon Abaunza <jabaunza@sisteplant.com>",
   "private": true,
   "scripts": {
+    "build:android": "quasar build -m cordova -T android",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "test:unit": "jest --updateSnapshot --coverage --coverageReporters=cobertura",
