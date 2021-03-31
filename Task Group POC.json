@@ -1,0 +1,444 @@
+{
+    "tasks":[
+      {
+        "environment":{
+          
+        },
+        "displayName":"npm install",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "command":"install",
+          "workingDir":"",
+          "verbose":"false",
+          "customCommand":"",
+          "customRegistry":"useNpmrc",
+          "customFeed":"",
+          "customEndpoint":"",
+          "publishRegistry":"useExternalRegistry",
+          "publishFeed":"",
+          "publishPackageMetadata":"true",
+          "publishEndpoint":""
+        },
+        "task":{
+          "id":"fe47e961-9fa8-4106-8639-368c022d43ad",
+          "versionSpec":"1.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Install Cordova",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "command":"custom",
+          "workingDir":"",
+          "verbose":"false",
+          "customCommand":"install -g cordova",
+          "customRegistry":"useNpmrc",
+          "customFeed":"",
+          "customEndpoint":"",
+          "publishRegistry":"useExternalRegistry",
+          "publishFeed":"",
+          "publishPackageMetadata":"true",
+          "publishEndpoint":""
+        },
+        "task":{
+          "id":"fe47e961-9fa8-4106-8639-368c022d43ad",
+          "versionSpec":"1.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Install Quasar Cli",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "command":"custom",
+          "workingDir":"",
+          "verbose":"false",
+          "customCommand":"install -g @quasar/cli",
+          "customRegistry":"useNpmrc",
+          "customFeed":"",
+          "customEndpoint":"",
+          "publishRegistry":"useExternalRegistry",
+          "publishFeed":"",
+          "publishPackageMetadata":"true",
+          "publishEndpoint":""
+        },
+        "task":{
+          "id":"fe47e961-9fa8-4106-8639-368c022d43ad",
+          "versionSpec":"1.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Run Tests",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "script":"$(TestCommand)",
+          "workingDirectory":"",
+          "failOnStderr":"false"
+        },
+        "task":{
+          "id":"d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+          "versionSpec":"2.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Publish code coverage from $(System.DefaultWorkingDirectory)/**/*coverage.xml",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "codeCoverageTool":"Cobertura",
+          "summaryFileLocation":"$(System.DefaultWorkingDirectory)/**/*coverage.xml",
+          "pathToSources":"",
+          "reportDirectory":"$(System.DefaultWorkingDirectory)/**/coverage",
+          "additionalCodeCoverageFiles":"",
+          "failIfCoverageEmpty":"false"
+        },
+        "task":{
+          "id":"2a7ebc54-c13e-490e-81a5-d7561ab7cd97",
+          "versionSpec":"1.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Build Android APK",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "script":"$(BuildAndroidCommand)",
+          "workingDirectory":"",
+          "failOnStderr":"false"
+        },
+        "task":{
+          "id":"d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+          "versionSpec":"2.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Signing and aligning APK file(s) **/*.apk",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "files":"**/*.apk",
+          "apksign":"true",
+          "keystoreFile":"$(KeyStoreFile)",
+          "keystorePass":"$(KeyStorePassword)",
+          "keystoreAlias":"$(KeyStoreAlias)",
+          "keyPass":"$(KeyPassword)",
+          "apksignerVersion":"latest",
+          "apksignerArguments":"--verbose",
+          "apksignerLocation":"",
+          "zipalign":"true",
+          "zipalignVersion":"latest",
+          "zipalignLocation":""
+        },
+        "task":{
+          "id":"80f3f6a0-82a6-4a22-ba7a-e5b8c541b9b9",
+          "versionSpec":"3.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Copy Files to: $(build.artifactstagingdirectory)",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "SourceFolder":"$(ApkDistDirectory)",
+          "Contents":"*.apk",
+          "TargetFolder":"$(build.artifactstagingdirectory)",
+          "CleanTargetFolder":"false",
+          "OverWrite":"false",
+          "flattenFolders":"false",
+          "preserveTimestamp":"false",
+          "retryCount":"0"
+        },
+        "task":{
+          "id":"5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c",
+          "versionSpec":"2.*",
+          "definitionType":"task"
+        }
+      },
+      {
+        "environment":{
+          
+        },
+        "displayName":"Publish Pipeline Artifact",
+        "alwaysRun":false,
+        "continueOnError":false,
+        "condition":"succeeded()",
+        "enabled":true,
+        "timeoutInMinutes":0,
+        "inputs":{
+          "path":"$(build.artifactstagingdirectory)/",
+          "artifactName":"$(ArtifactName)",
+          "artifactType":"pipeline",
+          "fileSharePath":"",
+          "parallel":"false",
+          "parallelCount":"8"
+        },
+        "task":{
+          "id":"ecdc45f6-832d-4ad9-b52b-ee49e94659be",
+          "versionSpec":"1.*",
+          "definitionType":"task"
+        }
+      }
+    ],
+    "runsOn":[
+      "Agent",
+      "DeploymentGroup"
+    ],
+    "revision":3,
+    "createdBy":{
+      "displayName":"Gladson Bruno",
+      "id":"c05c2e1d-cdc5-6a51-a708-e3747345e104",
+      "uniqueName":"gladson@arkhi.com.br"
+    },
+    "createdOn":"2021-03-31T18:50:43.597Z",
+    "modifiedBy":{
+      "displayName":"Gladson Bruno",
+      "id":"c05c2e1d-cdc5-6a51-a708-e3747345e104",
+      "uniqueName":"gladson@arkhi.com.br"
+    },
+    "modifiedOn":"2021-03-31T19:01:11.900Z",
+    "comment":"",
+    "id":"99668a02-0042-43d2-86ee-a3e91042542d",
+    "name":"Task Group POC",
+    "version":{
+      "major":1,
+      "minor":0,
+      "patch":0,
+      "isTest":false
+    },
+    "iconUrl":"https://cdn.vsassets.io/v/M184_20210325.4/_content/icon-meta-task.png",
+    "friendlyName":"Task Group POC",
+    "description":"",
+    "category":"Build",
+    "definitionType":"metaTask",
+    "author":"Gladson Bruno",
+    "demands":[
+      
+    ],
+    "groups":[
+      
+    ],
+    "inputs":[
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          
+        },
+        "name":"ApkDistDirectory",
+        "label":"ApkDistDirectory",
+        "defaultValue":"",
+        "required":true,
+        "type":"filePath",
+        "helpMarkDown":"The source folder that the copy pattern(s) will be run from.  Empty is the root of the repo.  Use [variables](https://go.microsoft.com/fwlink/?LinkID=550988) if files are not in the repo. Example: $(agent.builddirectory)",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          
+        },
+        "name":"ArtifactName",
+        "label":"ArtifactName",
+        "defaultValue":"",
+        "required":true,
+        "type":"string",
+        "helpMarkDown":"Name of the artifact to publish. If not set, defaults to a unique ID scoped to the job.",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          "resizable":"true",
+          "rows":"10",
+          "maxLength":"5000"
+        },
+        "name":"BuildAndroidCommand",
+        "label":"BuildAndroidCommand",
+        "defaultValue":"",
+        "required":true,
+        "type":"multiLine",
+        "helpMarkDown":"Enter the npm command used to generate the Android apk for your application.",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          
+        },
+        "name":"KeyPassword",
+        "label":"KeyPassword",
+        "defaultValue":"",
+        "required":true,
+        "type":"string",
+        "helpMarkDown":"Enter the key password for the alias and keystore file. Use a new variable with its lock enabled on the Variables tab to encrypt this value.",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          
+        },
+        "name":"KeyStoreAlias",
+        "label":"KeyStoreAlias",
+        "defaultValue":"",
+        "required":true,
+        "type":"string",
+        "helpMarkDown":"Enter the alias that identifies the public/private key pair to be used in the keystore file.",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          
+        },
+        "name":"KeyStoreFile",
+        "label":"KeyStoreFile",
+        "defaultValue":"",
+        "required":true,
+        "type":"secureFile",
+        "helpMarkDown":"Select the keystore file that was uploaded to `Secure Files` to be used to sign the APK.",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          
+        },
+        "name":"KeyStorePassword",
+        "label":"KeyStorePassword",
+        "defaultValue":"",
+        "required":true,
+        "type":"string",
+        "helpMarkDown":"Enter the password for the provided keystore file. Use a new variable with its lock enabled on the Variables tab to encrypt this value.",
+        "groupName":""
+      },
+      {
+        "aliases":[
+          
+        ],
+        "options":{
+          
+        },
+        "properties":{
+          "resizable":"true",
+          "rows":"10",
+          "maxLength":"5000"
+        },
+        "name":"TestCommand",
+        "label":"TestCommand",
+        "defaultValue":"",
+        "required":true,
+        "type":"multiLine",
+        "helpMarkDown":"Enter the NPM command used to run your application tests.",
+        "groupName":""
+      }
+    ],
+    "satisfies":[
+      
+    ],
+    "sourceDefinitions":[
+      
+    ],
+    "dataSourceBindings":[
+      
+    ],
+    "instanceNameFormat":"Task group: Task Group POC $(ApkDistDirectory)",
+    "preJobExecution":{
+      
+    },
+    "execution":{
+      
+    },
+    "postJobExecution":{
+      
+    }
+  }
